@@ -1,60 +1,83 @@
 <!DOCTYPE html>
-<html xmlns="https://www.thymeleaf.org">
+<html lang="es">
 <head>
-<meta charset="ISO-8859-1">
-<title>CRUD SPRING BOOT</title>
-<style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    table {
-        width: 80%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-    th, td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: center;
-    }
-    thead {
-        background-color: #5BA5EA;
-        color: white;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD SPRING BOOT</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        input[type="submit"],
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .btn-users {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .btn-users:hover {
+            background-color: #218838;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <a th:href="@{/new}">Cerrar</a>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>NOMBRES</th>
-                    <th>TELEFONO</th>                    
-                    <th>ACCION</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="p:${personas}">
-                    <td th:text="${p.id}"></td>
-                    <td th:text="${p.name}"></td>
-                    <td th:text="${p.telefono}"></td>
-                    <td>
-                        <a th:onclick="eliminar([[${p.id}]])" href="#">delete</a>
-                        <a th:href="@{/listar/}+${p.id}">editar</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container">
+        <div class="logo">
+            <img src="../5087607.png" alt="Bienvenido">
+        </div>
+        <form th:action="@{/save}" th:object="${persona}" method="POST">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" th:field="*{id}" readonly="readonly" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="name">NOMBRES</label>
+                <input type="text" th:field="*{name}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="telefono">TELEFONO</label>
+                <input type="text" th:field="*{telefono}" class="form-control" />
+            </div>
+            <div>
+                <input type="submit" value="Guardar" class="btn btn-primary" /> 
+                <a th:href="@{/listar}" class="btn btn-users">Usuarios</a>
+            </div>
+        </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="/funciones.js"></script>
 </body>
 </html>
